@@ -1,0 +1,8 @@
+#pragma once
+
+class {5}
+{
+public:
+	{5}();
+	~{5}();
+};
