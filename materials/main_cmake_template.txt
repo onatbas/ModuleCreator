@@ -5,7 +5,7 @@ enable_testing()
 
 # sets
 set (CMAKE_CXX_STANDARD 14)
-
+set(CMAKE_MODULE_PATH ${CMAKE_MODULE_PATH} "${CMAKE_SOURCE_DIR}/cmake")
 set(CLASS_NAMES {4})
 
 set({0}_HDR_FILES "")
@@ -20,6 +20,7 @@ ENDFOREACH()
 
 # includes/include directories
 include(${CMAKE_CURRENT_SOURCE_DIR}/cmake/configure_boost.cmake)
+include(${CMAKE_CURRENT_SOURCE_DIR}/cmake/configure_cucumber.cmake)
 include(${CMAKE_CURRENT_SOURCE_DIR}/cmake/configure_gtest.cmake)
 include(${CMAKE_CURRENT_SOURCE_DIR}/cmake/configure_gmock.cmake)
 #include(${CMAKE_CURRENT_SOURCE_DIR}/cmake/configure_qt5.cmake)
