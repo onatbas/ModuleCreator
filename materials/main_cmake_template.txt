@@ -39,21 +39,3 @@ add_subdirectory(${CMAKE_CURRENT_SOURCE_DIR}/tests)
 #install
 install(TARGETS {1} DESTINATION ${CMAKE_INSTALL_PREFIX}/bin)
 install(FILES ${{0}_HDR_FILES} DESTINATION ${CMAKE_INSTALL_PREFIX}/include/{1})
-
-
-###########################################################################################################################
-### ```cmake
-### find_package(Git REQUIRED)
-### IF (NOT {{1}_FOUND} )
-###     set (GIT_USERNAME "212472385" CACHE STRING "github.build.ge.com username")
-###     set (GIT_TOKEN "" CACHE STRING "github.build.ge.com personal access token")
-###     include(ExternalProject)
-###     execute_process(COMMAND ${GIT_EXECUTABLE} clone https://${GIT_USERNAME}:${GIT_TOKEN}@github.build.ge.com/212472385/{1}.git
-###     				WORKING_DIRECTORY ${CMAKE_BINARY_DIR}/{1})
-###     set({1}_FOUND true)
-###     add_subdirectory(${CMAKE_BINARY_DIR}/{1} {1}_build )
-###     include_directories(${CMAKE_BINARY_DIR}/{1}/include)
-### ENDIF()
-### #link against {1}
-### ```
-########################################################################################################################
