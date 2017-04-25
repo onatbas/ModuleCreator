@@ -18,7 +18,7 @@ Steps to install:
 4. Compile
 	`cmake --build .`
 5. Copy the contents of the materials folder into bin.
-	`cp ../materials/* .`
+	`cp -r ../materials/* .`
 
 And that's it. You may use the ModuleCreator to create new cmake projects with a GUI.
 
