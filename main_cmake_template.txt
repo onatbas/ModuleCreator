@@ -1,0 +1,43 @@
+cmake_minimum_required(VERSION {CMAKE_VER})
+project({1})
+include(CTest)
+enable_testing()
+
+# sets
+set (CMAKE_CXX_STANDARD 14)
+set(CMAKE_MODULE_PATH ${CMAKE_MODULE_PATH} "${CMAKE_SOURCE_DIR}/cmake")
+set(CLASS_NAMES {4})
+
+set({0}_HDR_FILES "")
+set({0}_SRC_FILES "")
+
+FOREACH(CLASS_NAME ${CLASS_NAMES})
+     set({0}_HDR_FILES
+     	${{0}_HDR_FILES} ${CMAKE_CURRENT_SOURCE_DIR}/include/{1}/${CLASS_NAME}.hxx)
+     set({0}_SRC_FILES 
+     	${{0}_SRC_FILES} ${CMAKE_CURRENT_SOURCE_DIR}/src/${CLASS_NAME}.cxx)
+ENDFOREACH()
+
+# includes/include directories
+#include(${CMAKE_CURRENT_SOURCE_DIR}/cmake/configure_boost.cmake)
+#include(${CMAKE_CURRENT_SOURCE_DIR}/cmake/configure_cucumber.cmake)
+#include(${CMAKE_CURRENT_SOURCE_DIR}/cmake/configure_gtest.cmake)
+#include(${CMAKE_CURRENT_SOURCE_DIR}/cmake/configure_gmock.cmake)
+#include(${CMAKE_CURRENT_SOURCE_DIR}/cmake/configure_qt5.cmake)
+include_directories(${CMAKE_CURRENT_SOURCE_DIR}/include/{1})
+include_directories(${CMAKE_CURRENT_BINARY_DIR})
+
+# binaries/executables/libraries
+add_library({1} STATIC ${{0}_HDR_FILES} ${{0}_SRC_FILES})
+add_executable({1}Exec main.cxx)
+
+# linker
+target_link_libraries({1} ${Boost_LIBRARIES} ${QT5_LINK_TARGETS})
+target_link_libraries({1}Exec {1})
+
+#tests
+add_subdirectory(${CMAKE_CURRENT_SOURCE_DIR}/tests)
+
+#install
+install(TARGETS {1} DESTINATION ${CMAKE_INSTALL_PREFIX}/bin)
+install(FILES ${{0}_HDR_FILES} DESTINATION ${CMAKE_INSTALL_PREFIX}/include/{1})
