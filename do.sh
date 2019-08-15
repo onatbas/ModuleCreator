@@ -1,13 +1,33 @@
-#{1} projectName - camelCase?
+#!/bin/bash
+
 var_0="MYPROJECT"
 var_1="myProject"
 
-var_3="Test1 Test2"
-var_4="Writer Reader"
+var_3=""
+var_4=""
 CMAKE_VER=2.8
 
-#var_5 = for evey class name, you get one of these
-#var_6 = for every test name you get one of these
+while getopts c:t:n: option
+do 
+	case "$option" in
+		n)
+			var_0=${OPTARG^^}
+			var_1=$OPTARG
+			;;
+		t)
+			var_3="$var_3 $OPTARG"
+			;;
+		c)
+			var_4="$var_4 $OPTARG"
+			;;
+		*)
+			echo "-n <NAME> : name of the module (camelCase preferred)"
+			echo "-c <CLASSNAME> : add a new class to the lib"
+			echo "-t <TESTCLASSNAME> : add a new test exec to the lib"
+			exit
+			;;
+	esac
+done	
 
 mkdir "$var_1"
 mkdir "$var_1/include"
@@ -23,12 +43,12 @@ mkdir "$var_1/tests"
 for iterator in $var_4
 do
 	var_5=$iterator
-	. replacer.sh "class_src_template.txt"  "$var_1/src/$var_5.cxx"
-	. replacer.sh "class_hdr_template.txt"  "$var_1/include/$var_1/$var_5.hxx"
+	. replacer.sh "class_src_template.txt" "$var_1/src/$var_5.cxx"
+	. replacer.sh "class_hdr_template.txt" "$var_1/include/$var_1/$var_5.hxx"
 done
 
 for iterator in $var_3
 do
 	var_6=$iterator
-	. replacer.sh "test_template.txt"  "$var_1/tests/$var_6.cxx"
+	. replacer.sh "test_template.txt" "$var_1/tests/$var_6.cxx"
 done
