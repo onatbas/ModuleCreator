@@ -1,7 +1,14 @@
 #include <iostream>
 
+enum TEST_RESULT{
+	SUCCESS = 0,
+	FAIL
+};
+
+#define ASSERT(X, Y) if (!(X)){ std::cout << "Failed: "<< #X ", " <<  Y  << std::endl; return FAIL;  }
+
 int main()
 {
-	// TODO : Write Tests
-	return 1; // 1: fail, 0: success
+	ASSERT(false, "TODO: Write tests");
+	return SUCCESS;
 }
