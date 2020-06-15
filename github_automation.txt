@@ -1,0 +1,28 @@
+name: CI
+on:
+  push:
+    branches: [ master ]
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+
+    steps:
+    - uses: actions/checkout@v2
+    - name: Update apt
+      run: sudo apt update
+    - name: Install GCC
+      run: sudo apt install gcc -y
+    - name: Install CMake
+      run: sudo apt install cmake -y
+    - name: Install boost
+      run: sudo apt install libboost-all-dev -y
+    - name: Install SDL2
+      run: sudo apt install libsdl2-dev libsdl2-ttf-dev libsdl2-image-dev libsdl2-mixer-dev -y --fix-missing
+    - name: build
+      run: |
+        mkdir bin
+        cd bin
+        cmake ..
+        cmake --build .
+        ctest -V -R {1}_AUTOMATED

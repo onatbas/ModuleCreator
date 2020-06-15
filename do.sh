@@ -35,10 +35,13 @@ mkdir "$var_1/include/$var_1"
 mkdir "$var_1/src"
 mkdir "$var_1/cmake"
 mkdir "$var_1/tests"
+mkdir "$var_1/.github"
+mkdir "$var_1/.github/workflows"
 
 . replacer.sh "main_cmake_template.txt" "$var_1/CMakeLists.txt"
 . replacer.sh "main_template.txt" "$var_1/main.cxx"
 . replacer.sh "test_cmake_template.txt" "$var_1/tests/CMakeLists.txt"
+. replacer.sh "github_automation.txt" "$var_1/.github/workflows/auto.yml"
 
 for iterator in $var_4
 do
